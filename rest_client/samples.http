@@ -2,13 +2,13 @@
 GET http://localhost:8080/ping
 
 ###
-GET http://localhost:8080/users/1
+GET http://localhost:8080/users/2
 
 ### Success 
 POST http://localhost:8080/users 
 
 {
-    "id": 12,
+    "id": 1,
     "first_name": "Rajesh",
     "last_name": "Reddy",
     "email":"rajesh.reddy@test.com"
@@ -18,7 +18,7 @@ POST http://localhost:8080/users
 POST http://localhost:8080/users 
 
 {
-    "id": "12",
+    "id": 12,
     "first_name": "Rajesh",
     "last_name": "Reddy",
     "email":"rajesh.reddy@test.com"
