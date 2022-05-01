@@ -1,9 +1,20 @@
+### 
 GET http://localhost:8080/ping
 
 ###
 GET http://localhost:8080/users/1
 
-###
+### Success 
+POST http://localhost:8080/users 
+
+{
+    "id": 12,
+    "first_name": "Rajesh",
+    "last_name": "Reddy",
+    "email":"rajesh.reddy@test.com"
+}
+
+### Bad Request 
 POST http://localhost:8080/users 
 
 {
@@ -13,5 +24,5 @@ POST http://localhost:8080/users
     "email":"rajesh.reddy@test.com"
 }
 
-###
+### Not found 
 GET http://localhost:8080/dummy

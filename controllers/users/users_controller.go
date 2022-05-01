@@ -17,6 +17,7 @@ func CreateUser(c *gin.Context) {
 	// 	// TODO Handle error
 	// 	return
 	// }
+
 	// if err := json.Unmarshal(bytes, &user); err != nil {
 	// 	fmt.Println(err)
 	// 	// TODO handle err
