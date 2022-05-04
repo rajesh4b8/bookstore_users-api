@@ -11,7 +11,6 @@ GET http://localhost:8080/users/2
 POST http://localhost:8080/users 
 
 {
-    "id": 1,
     "first_name": "Rajesh",
     "last_name": "Reddy",
     "email":"rajesh.reddy@test.com"
