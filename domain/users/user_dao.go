@@ -17,7 +17,7 @@ const (
 )
 
 var (
-	usersDB = make(map[int64]*User)
+// usersDB = make(map[int64]*User)
 )
 
 func (user *User) Get() *errors.RestErr {
