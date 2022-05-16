@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/rajesh4b8/bookstore_users-api/datasources/mysql/users_db"
+	"github.com/rajesh4b8/bookstore_users-api/logger"
 	dateutils "github.com/rajesh4b8/bookstore_users-api/utils/date_utils"
 	"github.com/rajesh4b8/bookstore_users-api/utils/errors"
 )
@@ -26,8 +27,8 @@ func (user *User) Get() *errors.RestErr {
 	}
 	stmt, err := users_db.Client.Prepare(queryFetchUser)
 	if err != nil {
-		fmt.Println(err)
-		return errors.NewInternalServerError("Server error when prepare stmt")
+		logger.Error("Server error when prepare stmt", err)
+		return errors.NewInternalServerError("Database error")
 	}
 	defer stmt.Close()
 	result := stmt.QueryRow(user.Id)
@@ -35,8 +36,8 @@ func (user *User) Get() *errors.RestErr {
 		if strings.Contains(err.Error(), noRowsError) {
 			return errors.NewNotFoundError(fmt.Sprintf("user %d not found", user.Id))
 		}
-		fmt.Println(err)
-		return errors.NewInternalServerError(fmt.Sprintf("Error when fetching the user with id %d", user.Id))
+		logger.Error(fmt.Sprintf("Error when fetching the user with id %d", user.Id), err)
+		return errors.NewInternalServerError("Database error")
 	}
 
 	return nil
@@ -48,8 +49,8 @@ func (user *User) Save() *errors.RestErr {
 	}
 	stmt, err := users_db.Client.Prepare(queryInsertUser)
 	if err != nil {
-		fmt.Println(err)
-		return errors.NewInternalServerError("Server error when prepare stmt")
+		logger.Error("Server error when prepare stmt", err)
+		return errors.NewInternalServerError("Database error")
 	}
 	defer stmt.Close()
 
@@ -58,8 +59,8 @@ func (user *User) Save() *errors.RestErr {
 	var dateCreated time.Time
 	saveErr := stmt.QueryRow(user.FirstName, user.LastName, user.Email).Scan(&userId, &dateCreated)
 	if saveErr != nil {
-		fmt.Println(err)
-		return errors.NewInternalServerError("Error while inserting the user")
+		logger.Error("Error while inserting the user", err)
+		return errors.NewInternalServerError("Database error")
 	}
 	// current := usersDB[user.Id]
 	// if current != nil {

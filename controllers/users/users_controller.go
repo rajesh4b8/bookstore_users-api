@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/rajesh4b8/bookstore_users-api/domain/users"
-	usersService "github.com/rajesh4b8/bookstore_users-api/services/users"
+	"github.com/rajesh4b8/bookstore_users-api/services"
 	"github.com/rajesh4b8/bookstore_users-api/utils/errors"
 )
 
@@ -31,7 +31,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	result, saveErr := usersService.CreateUser(user)
+	result, saveErr := services.UsersService.CreateUser(user)
 	if saveErr != nil {
 		c.JSON(saveErr.Status, saveErr)
 		return
@@ -47,7 +47,7 @@ func GetUser(c *gin.Context) {
 		return
 	}
 
-	user, getErr := usersService.GetUser(userId)
+	user, getErr := services.UsersService.GetUser(userId)
 	if getErr != nil {
 		c.JSON(getErr.Status, getErr)
 		return
